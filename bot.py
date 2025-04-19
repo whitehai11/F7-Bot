@@ -1,6 +1,6 @@
+import os
 import discord
 from discord.ext import commands, tasks
-import os
 import requests
 
 # Hole die sensiblen Daten aus den Umgebungsvariablen
@@ -8,6 +8,12 @@ TOKEN = os.getenv('DISCORD_TOKEN')  # Discord Bot Token
 FORTNITE_API_KEY = os.getenv('FORTNITE_API_KEY')  # Fortnite API Key
 GUILD_ID = int(os.getenv('GUILD_ID'))  # Server ID
 MOD_CHANNEL_ID = int(os.getenv('MOD_CHANNEL_ID'))  # Mod Channel ID
+
+# Überprüfe, ob der Token korrekt geladen wurde
+if not TOKEN:
+    print("Fehler: Kein Discord Token gesetzt!")
+else:
+    print(f"Token erfolgreich geladen.")
 
 # Bot-Intents und Prefix
 intents = discord.Intents.default()
