@@ -1,17 +1,13 @@
 import discord
 from discord.ext import commands, tasks
 import os
-from dotenv import load_dotenv
 import requests
 
-# Lade die Umgebungsvariablen aus der .env-Datei
-load_dotenv()
-
 # Hole die sensiblen Daten aus den Umgebungsvariablen
-TOKEN = os.getenv('DISCORD_TOKEN')
-FORTNITE_API_KEY = os.getenv('FORTNITE_API_KEY')
-GUILD_ID = int(os.getenv('GUILD_ID'))
-MOD_CHANNEL_ID = int(os.getenv('MOD_CHANNEL_ID'))
+TOKEN = os.getenv('DISCORD_TOKEN')  # Discord Bot Token
+FORTNITE_API_KEY = os.getenv('FORTNITE_API_KEY')  # Fortnite API Key
+GUILD_ID = int(os.getenv('GUILD_ID'))  # Server ID
+MOD_CHANNEL_ID = int(os.getenv('MOD_CHANNEL_ID'))  # Mod Channel ID
 
 # Bot-Intents und Prefix
 intents = discord.Intents.default()
@@ -98,7 +94,7 @@ async def ban(ctx, member: discord.Member):
 async def fortnitestats(ctx, username: str):
     """Zeigt Fortnite-Stats eines Spielers"""
     url = f'https://api.fortnitetracker.com/v1/profile/{username}'
-    headers = {'TRN-Api-Key': FORTNITE_API_KEY}  # Verwende den API-Key aus der .env-Datei
+    headers = {'TRN-Api-Key': FORTNITE_API_KEY}  # Verwende den API-Key aus der Umgebungsvariablen
     response = requests.get(url, headers=headers)
     
     if response.status_code == 200:
@@ -115,7 +111,7 @@ async def fortnitestats(ctx, username: str):
 async def fortniteshop(ctx):
     """Zeigt die aktuellen Items im Fortnite-Shop"""
     url = 'https://api.fortnitetracker.com/v1/shop'
-    headers = {'TRN-Api-Key': FORTNITE_API_KEY}  # Verwende den API-Key aus der .env-Datei
+    headers = {'TRN-Api-Key': FORTNITE_API_KEY}  # Verwende den API-Key aus der Umgebungsvariablen
     response = requests.get(url, headers=headers)
     
     if response.status_code == 200:
